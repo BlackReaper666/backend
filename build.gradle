@@ -41,9 +41,12 @@ apply plugin: 'org.liquibase.gradle'
 liquibase {
 	activities {
 		main {
+			File propsFile = new File("${project.rootDir}/src/main/resources/liquibase.properties")
+			Properties properties = new Properties()
+			properties.load(new FileInputStream(propsFile))
 			changeLogFile 'src/main/resources/liquibase-changelog.xml'
-			url 'localhost:3306/backend'
-			username 'root'
+			url '${url}'
+			username '${username}'
 		}
 		runList = main
 	}
